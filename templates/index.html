@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Properties</title>
+</head>
+<body>
+    <h1>Uploaded Properties</h1>
+    <ul>
+        {% for property in properties %}
+            <li>
+                <strong>Location:</strong> {{ property[1] }}<br>
+                <strong>Type:</strong> {{ property[2] }}<br>
+                <strong>Availability:</strong> {{ property[3] }}<br>
+                <strong>Amount:</strong> {{ property[4] }}<br>
+                <img src="{{ property[5] }}" alt="Property Image" style="max-width: 300px;"><br><br>
+            </li>
+        {% endfor %}
+    </ul>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="location">Location:</label>
+        <input type="text" name="location" required><br>
+        <label for="type">Type:</label>
+        <input type="text" name="type" required><br>
+        <label for="availability">Availability:</label>
+        <input type="text" name="availability" required><br>
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" required><br>
+        <label for="file">Upload Image:</label>
+        <input type="file" name="file" accept=".png, .jpg, .jpeg, .gif" required><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

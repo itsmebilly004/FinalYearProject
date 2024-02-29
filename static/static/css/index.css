@@ -1,0 +1,70 @@
+/* Reset some default styles */
+body, h1, h2, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #583c3c;
+    color: #f3e7e7;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar-header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.navbar-toggler {
+    background: none;
+    border: none;
+    color: #277bac;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.navbar-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+
+.navbar-links a {
+    padding: 10px;
+    text-decoration: none;
+    color: #d3e5dc;
+}
+
+/* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.image-container img {
+    width: 48%;
+    border-radius: 8px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .navbar-links {
+        flex-direction: column;
+        display: none;
+    }
+
+    .navbar-links.show {
+        display: flex;
+    }
+}
