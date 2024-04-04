@@ -10,33 +10,44 @@
     <title>Property Upload</title>
 </head>
 <body>
-    <h1>Uploaded Properties</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="location">Location:</label>
-        <input type="text" name="location" required><br>
-        <label for="type">Type:</label>
-        <input type="text" name="type" required><br>
-        <label for="availability">Availability:</label>
-        <input type="text" name="availability" required><br>
-        <label for="amount">Amount:</label>
-        <input type="number" name="amount" required><br>
-        <label for="file">Choose File:</label>
-        <input type="file" name="file" accept=".png, .jpg, .jpeg, .gif" required><br>
-        <input type="submit" value="Upload">
-    </form>
+<section class="justify-content-center" style="display: grid; grid-template-columns: 1fr;"> 
     
-    <div>
-        {% for property in properties %}
-            <div>
-                <p><strong>Location:</strong> {{ property[1] }}</p>
-                <p><strong>Type:</strong> {{ property[2] }}</p>
-                <p><strong>Availability:</strong> {{ property[3] }}</p>
-                <p><strong>Amount:</strong> {{ property[4] }}</p>
-                <img src="{{ property[5] }}" alt="Property Image" style="max-width: 300px;">
-                <hr>
-            </div>
-        {% endfor %}
+    <div style="text-align: center; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+    <h1>Add More details and price of your available units.</h1>
+    <form action="/upload2" method="post" enctype="multipart/form-data">
+        <label for="location">Location:</label>
+        <input type="text" name="location" required><br><br>
+
+        <label for="type">Type:</label>
+        <select name="type" required>
+            <option value="single room">single room</option>
+            <option value="Bedsitter">Bedsitter</option>
+            <option value="1 Bedroom">1 Bedroom</option>
+            <option value="2 Bedroom">2 Bedroom</option>
+            <option value="3 Bedroom">3 Bedroom</option>
+            <option value="4 Bedroom">4 Bedroom</option>
+            <option value="5 Bedroom">5 Bedroom</option>
+            <option value="6 Bedroom">6 Bedroom</option>
+        </select><br><br>
+        <label for="availability">Availability:</label>
+        <select name="availability" required>
+            <option value="For sale">For Sale</option>
+            <option value="For rent">For Rent</option>
+        </select><br><br>
+
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" required><br><br>
+
+        <label for="contact">Contact:</label>
+        <input type="text" name="contact" required><br><br>
+
+        <label for="file">Choose File:</label>
+        <input type="file" name="file" accept="image/*" required><br><br>
+
+        <input type="submit" value="Upload Property">
+    </form>
     </div>
+</section>  
 </body>
 </html>
 
