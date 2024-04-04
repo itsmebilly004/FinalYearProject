@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Property</title>
+</head>
+<body>
+
+<section class="justify-content-center" style="display: grid; grid-template-columns: 1fr;">
+
+        <div style="text-align: center; background-color: rgb(32, 171, 206); padding: 50px; margin: 50px; border-radius: 20px;">
+    <h1>Upload The Face Of Your Listings!!</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="location">Location:</label>
+        <input type="text" name="location" required><br><br>
+
+        <label for="type">Type:</label>
+        <select name="type" required>
+            <option value="single room">single room</option>
+            <option value="Bedsitter">Bedsitter</option>
+            <option value="1 Bedroom">1 Bedroom</option>
+            <option value="2 Bedroom">2 Bedroom</option>
+            <option value="3 Bedroom">3 Bedroom</option>
+            <option value="4 Bedroom">4 Bedroom</option>
+            <option value="5 Bedroom">5 Bedroom</option>
+            <option value="6 Bedroom">6 Bedroom</option>
+        </select><br><br>
+        <label for="file">Choose File:</label>
+        <input type="file" name="file" accept="image/*" required><br><br>
+
+        <input type="submit" value="Upload Property">
+    </form>
+
+</div>
+</section>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties</title>
+    <style>
+        /* Add your custom styles here */
+        .contact-icons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .whatsapp-icon, .phone-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <section class="justify-content-center" style="display: grid; grid-template-columns: 1fr;">
+        <div style="text-align: center; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+           <h1>These are the available unit Listings</h1>
+        </div>
+    </section><br><br>
+    <section class="justify-content-center" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
+
+        {% for list in listings %}
+        <div style="text-align: left; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+            <h3>Location: {{ list[1] }}</h3>
+            <p>Type: {{ list[2] }}</p>
+            <p>Availability: {{ list[3] }}</p>
+            <p>Amount: {{ list[4] }}</p>
+            <p>Contact: {{ list[5] }}</p>
+
+            <img src="{{ list[6] }}" alt="Property Image" style="max-width: 300px; border-radius: 20px;"><br>
+
+            <div class="contact-icons">
+                <!-- WhatsApp Icon -->
+                <span class="whatsapp-icon" onclick="redirectToWhatsApp('{{ list[5] }}')">📱 WhatsApp</span>
+                
+                <!-- Phone Call Icon -->
+                <span class="phone-icon" onclick="makePhoneCall('{{ list[5] }}')">📞 Phone Call</span>
+            </div>
+        </div>
+    
+        {% endfor %}
+    </section>
+
+    <script>
+        function redirectToWhatsApp(phoneNumber) {
+            // Modify the URL to include the phone number
+            window.location.href = `https://wa.me/${phoneNumber}`;
+        }
+
+        function makePhoneCall(phoneNumber) {
+            // Modify the URL to initiate a phone call
+            window.location.href = `tel:${phoneNumber}`;
+        }
+    </script>
+
+</body>
+
+{% endblock %}
+</html>

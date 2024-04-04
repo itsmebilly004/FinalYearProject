@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile</title>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.chat-container {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .chat-box {
+            padding: 20px;
+            overflow-y: scroll;
+            max-height: 400px;
+        }
+        .message {
+            background-color: #dcf8c6;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+            display: inline-block;
+            max-width: 70%;
+        }
+        .incoming-message {
+            background-color: #fff;
+            float: right;
+        }
+        .outgoing-message {
+            background-color: #dcf8c6;
+            float: left;
+        }
+        .message-text {
+            word-wrap: break-word;
+        }
+.navbar {
+    font-size: 18px;
+    background: linear-gradient(9deg, #3a81eb, #2cc05d, #962cc0, #c02c51, #2cb6c0, #c0aa2c);
+    border-bottom: #615858 4px solid;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding-bottom: 10px;
+}
+
+.main-nav {
+    list-style-type: none;
+    display: none;
+}
+
+.nav-links, .logo, .material-icons {
+    text-decoration: none;
+    color: ghostwhite;
+    opacity: 0.6;
+}
+
+.main-nav li {
+    text-align: center;
+    margin: 10px auto;
+}
+
+.logo {
+    display: flex;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.logo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+}
+
+.logo p {
+    margin-top: 12px;
+    padding-left: 5px;
+}
+
+.toggle-nav {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.material-icons {
+    font-size: 24px;
+}
+
+.active {
+    display: block;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}
+
+/* Button hover effect */
+.button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+/* Button focus effect */
+.button:focus {
+  outline: none;
+}
+/* For large screen more than 600 */
+
+@media screen and (min-width:600px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0;
+        height: 70px;
+        align-items: center;
+    }
+    .toggle-nav {
+        display: none;
+    }
+    .main-nav {
+        display: flex;
+        justify-content: end;
+        margin-right: 30px;
+    }
+    .main-nav>li {
+        margin: 0;
+    }
+    .nav-links {
+        margin-left: 20px;
+    }
+    .logo {
+        margin-top: 0;
+    }
+}
+    .profile-container {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 400px;
+    }
+    .profile-info {
+        margin-bottom: 10px;
+    }
+    .profile-info label {
+        font-weight: bold;
+    }
+    body {
+    margin: 0;
+    padding: 0;
+    background-color: #e6f2ff; /* Light blue background color */
+    font-family: Arial, sans-serif;
+  }
+  
+  section {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+    <nav class="navbar">
+        <span class="toggle-nav" id="toggle-nav">
+            <i class="material-icons">menu</i>
+        </span>
+        <!-- <div class=""> -->
+        <a href="#" class="logo"><img src="logo.jpg" alt="">
+            <p>welcome to your seller section</p>
+        </a>
+        <!-- </div> -->
+        <ul class="main-nav" id="main-nav">
+            <li><a href="/login" class="nav-links">logout</a></li>
+            
+        </ul>
+    </nav>
+    <script>
+        let mainNav = document.getElementById('main-nav');
+        let toggleNav = document.getElementById('toggle-nav');
+        toggleNav.addEventListener('click', function () {
+            mainNav.classList.toggle('active')
+        });
+    </script>
+<section class="section">
+<h1><p>Welcome {{ username }}!</p></h1>
+<div class="chat-container">
+    <div class="chat-box" id="chat-box">
+        {% for msg in messages %}
+            <div class="message incoming-message">
+                <span class="message-text">{{ msg.sender }}: {{ msg.message }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    <form id="message-form">
+        <input type="text" id="message" placeholder="Type your message..." style="width: 80%; padding: 10px; border: none; outline: none;">
+        <button type="submit" style="background-color: #25D366; color: #fff; border: none; padding: 10px; border-radius: 50%; cursor: pointer;"><i class="fa fa-send">Post</i></button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#message-form').submit(function (e) {
+            e.preventDefault();
+            var message = $('#message').val();
+            var sender = 'profile';
+            $.post('/send_message', {message: message, sender: sender}, function (data) {
+                if (data.success) {
+                    $('#message').val('');
+                    $('#chat-box').append('<div class="message outgoing-message"><span class="message-text">' + sender + ': ' + message + '</span></div>');
+                    $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+                }
+            });
+        });
+    });
+</script>
+<section class="justify-content-center" style="display: grid; grid-template-columns: 1fr;">
+            <div style="text-align: center; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+                <a href="upload"><button class="button">Upload the face of your listings</button></a>                  
+        </div>
+</section>
+
+<section class="justify-content-center" style="display: grid; grid-template-columns: 1fr;">
+    <div style="text-align: center; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+        <a href="list"><button class="button">Upload details of your listings</button></a>                 
+</div>
+</section>
+
+<section class="justify-content-center" style="display: grid; grid-template-columns: 1fr;">
+<div style="text-align: center; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+<table border="1" style="text-align: center;">
+    <h1>These are all listings available</h1>
+    <thead>
+        <tr>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Availability</th>
+            <th>Amount</th>
+            <th>Contact</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for listing in listings %}
+        <tr>
+            <td>{{ listing[1] }}</td>
+            <td>{{ listing[2] }}</td>
+            <td>{{ listing[3] }}</td>
+            <td>{{ listing[4] }}</td>
+            <td>{{ listing[5] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</section>
+</body>
+</html>
+
+

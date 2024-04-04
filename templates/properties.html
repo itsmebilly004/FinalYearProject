@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Properties</h1>
+
+    {% if properties %}
+        <section class="justify-content-center" style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+            {% for property in properties %}
+                <div style="text-align: left; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+                    <h3>Location: {{ property[1] }}</h3>
+                    <p>Type: {{ property[2] }}</p>
+
+                    <a href="{{ url_for('listings', username=property[0], property_id=property[7]) }}" style="text-decoration: none; color: inherit;">
+                        <img src="{{ property[3] }}" alt="Property Image" style="max-width: 300px;border-radius: 20px;"><br>
+                    </a>
+                </div>
+            {% endfor %}
+        </section>
+    {% else %}
+    <section class="justify-content-center" style="display: grid; grid-template-columns: 1fr;">
+            <div style="text-align: center; background-color: rgb(32, 171, 206); padding: 10px; margin: 10px; border-radius: 20px;">
+        <p><h1>No detailed listings yet!!.</h1></p>
+    </div>
+</section>
+    {% endif %}
+</body>
+
+{% endblock %}
+</html>
